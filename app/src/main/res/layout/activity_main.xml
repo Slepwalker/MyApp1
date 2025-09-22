@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="518dp">
+
+        <!-- Title -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="4dp">
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:stretchColumns="1">
+
+                <TextView
+                    android:id="@+id/txtTitulo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="67dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="Listado de Compras"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <!-- campos -->
+                <TableRow>
+
+                    <TextView
+                        android:layout_width="67dp"
+                        android:text="Nombre:" />
+
+                    <EditText
+                        android:id="@+id/edtNombre"
+                        android:hint="Nombre del Cliente"
+                        android:inputType="textPersonName"
+                        android:minHeight="48dp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView android:text="Telefono:" />
+
+                    <EditText
+                        android:id="@+id/edtTelefono"
+                        android:hint="Telefono del Cliente"
+                        android:inputType="phone"
+                        android:minHeight="48dp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView android:text="Producto:" />
+
+                    <EditText
+                        android:id="@+id/edtProducto"
+                        android:hint="Nombre del Producto"
+                        android:inputType="text"
+                        android:minHeight="48dp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView android:text="Cantidad:" />
+
+                    <EditText
+                        android:id="@+id/edtCantidad"
+                        android:layout_width="wrap_content"
+                        android:hint="Cantidad"
+                        android:inputType="number"
+                        android:minHeight="48dp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView android:text="Direccion:" />
+
+                    <EditText
+                        android:id="@+id/edtDireccion"
+                        android:hint="Direccion del Cliente"
+                        android:inputType="textPostalAddress"
+                        android:minHeight="48dp" />
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+
+        <!--Floating Action Button-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabEnviar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginTop="16dp"
+            android:contentDescription="Enviar Pedido"
+            android:src="@android:drawable/ic_menu_send"
+            app:backgroundTint="@android:color/holo_blue_dark" />
+    </FrameLayout>
+
+</LinearLayout>
