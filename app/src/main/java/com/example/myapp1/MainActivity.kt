@@ -1,47 +1,98 @@
 package com.example.myapp1
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.myapp1.ui.theme.MyApp1Theme
+import android.widget.Button
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : ComponentActivity() {
+class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            MyApp1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+        // Enlaza con el XML:
+        setContentView(R.layout.activity_main)
+
+        //Referencias
+        val edtNombre = findViewById<EditText>(R.id.edtNombre)
+        val edtTelefono = findViewById<EditText>(R.id.edtTelefono)
+        val edtProducto = findViewById<EditText>(R.id.edtProducto)
+        val edtCantidad = findViewById<EditText>(R.id.edtCantidad)
+        val edtDircliente = findViewById<EditText>(R.id.edtDircliente)
+
+        //Referencia al FloatingActionButton
+        val fabEnviar = findViewById<FloatingActionButton>(R.id.fabEnviar)
+
+        fabEnviar.setOnClickListener {
+            val nombre = edtNombre.text.toString()
+            val telefono = edtTelefono.text.toString()
+            val producto = edtProducto.text.toString()
+            val cantidad = edtCantidad.text.toString()
+            val direccion = edtDircliente.text.toString()
+
+            // Mostrar un resumen en Toast
+            val mensaje =
+                "Cliente: $nombre\nTel: $telefono\nProducto: $producto\nCantidad: $cantidad\nDir: $direccion"
+            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+
+            //validacion
+            fabEnviar.setOnClickListener {
+                val nombre = edtNombre.text.toString().trim()
+                val telefono = edtTelefono.text.toString().trim()
+                val producto = edtProducto.text.toString().trim()
+                val cantidad = edtCantidad.text.toString().trim()
+                val direccion = edtDircliente.text.toString().trim()
+                when {
+                    nombre.isEmpty() -> {
+                        edtNombre.error = "Ingrese su nombre"
+                        edtNombre.requestFocus()
+                    }
+
+                    telefono.isEmpty() -> {
+                        edtTelefono.error = "Ingrese su teléfono"
+                        edtTelefono.requestFocus()
+                    }
+
+                    !telefono.matches(Regex("^[0-9]{6,9}\$")) -> {
+                        edtTelefono.error = "Teléfono no válido"
+                        edtTelefono.requestFocus()
+                    }
+
+                    producto.isEmpty() -> {
+                        edtProducto.error = "Ingrese producto"
+                        edtProducto.requestFocus()
+                    }
+
+                    cantidad.isEmpty() -> {
+                        edtCantidad.error = "Ingrese cantidad"
+                        edtCantidad.requestFocus()
+                    }
+
+                    cantidad.toIntOrNull() == null || cantidad.toInt() <= 0 -> {
+                        edtCantidad.error = "Cantidad no válida"
+                        edtCantidad.requestFocus()
+                    }
+
+                    direccion.isEmpty() -> {
+                        edtDircliente.error = "Ingrese dirección"
+                        edtDircliente.requestFocus()
+                    }
+
+                    else -> {
+                        // Todo válido → muestra el mensaje
+                        val mensaje = """
+                Cliente: $nombre
+                Tel: $telefono
+                Producto: $producto
+                Cantidad: $cantidad
+                Dir: $direccion
+            """.trimIndent()
+
+                        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    MyApp1Theme {
-        Greeting("Android")
     }
 }
