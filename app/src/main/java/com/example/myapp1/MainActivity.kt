@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
                         edtTelefono.requestFocus()
                     }
 
-                    !telefono.matches(Regex("^[0-9]{6,9}\$")) -> {
+                    !telefono.matches(Regex("^[0-9]{6,9}$")) -> {
                         edtTelefono.error = "Teléfono no válido"
                         edtTelefono.requestFocus()
                     }
