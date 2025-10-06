@@ -6,14 +6,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
+import com.example.myapp1.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity(){
+
+    private lateinit var b: ActivitySplashBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        b= ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(b.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         },2000)
     }

@@ -1,98 +1,56 @@
 package com.example.myapp1
 
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapp1.databinding.ActivityMainBinding
+import com.example.myapp1.model.CourseItem
+import com.example.myapp1.ui.theme.adapter.CourseAdapter
 
 class MainActivity : AppCompatActivity() {
 
+    companion object{
+        const val EXTRA_STUDENT_NAME = "extra_student_name"
+        const val EXTRA_STUDENT_EMAIL = "extra_student_email"
+    }
+
+    private lateinit var b: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Enlaza con el XML:
-        setContentView(R.layout.activity_main)
+        b = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(b.root)
 
-        //Referencias
-        val edtNombre = findViewById<EditText>(R.id.edtNombre)
-        val edtTelefono = findViewById<EditText>(R.id.edtTelefono)
-        val edtProducto = findViewById<EditText>(R.id.edtProducto)
-        val edtCantidad = findViewById<EditText>(R.id.edtCantidad)
-        val edtDircliente = findViewById<EditText>(R.id.edtDircliente)
+        val name = intent.getStringExtra(EXTRA_STUDENT_NAME).orEmpty()
+        val email = intent.getStringExtra(EXTRA_STUDENT_EMAIL).orEmpty()
 
-        //Referencia al FloatingActionButton
-        val fabEnviar = findViewById<FloatingActionButton>(R.id.fabEnviar)
+        b.tvWelcome.text = "Bienvenido, $name"
+        b.tvEmail.text = email
 
-        fabEnviar.setOnClickListener {
-            val nombre = edtNombre.text.toString()
-            val telefono = edtTelefono.text.toString()
-            val producto = edtProducto.text.toString()
-            val cantidad = edtCantidad.text.toString()
-            val direccion = edtDircliente.text.toString()
+        val courses = listOf(
+            CourseItem(R.mipmap.ic_launcher_round, "Cuaderno A4 tapa dura rayado","Cuaderno de tapa dura, ideal para clases o apuntes","5.00"),
+            CourseItem(R.mipmap.ic_launcher_round,"Lápiz grafito HB","Lápiz tecnico para escritura y dibujo técnico","0.50"),
+            CourseItem(R.mipmap.ic_launcher_round,"Lapicero Azul Pilot", "Lapicero de Tinta Azul con agarre ergonómico", "3.50"),
+            CourseItem(R.mipmap.ic_launcher_round, "Marcadores permanentes", "Set de marcadores (Negro, Rojo, Azul, Verde)", "6.00"),
+            CourseItem(R.mipmap.ic_launcher_round, "Resaltadores Stabilo", "Resaltadores de coloeres (Amarillo, Rosa, Verde, Celeste, Naranja", "7.50"),
+            CourseItem(R.mipmap.ic_launcher_round, "Goma de Borrar","Goma de Borrar Blanca", "0.50"),
+            CourseItem(R.mipmap.ic_launcher_round, "Regla plástica 30cm", "Regla Transparente con medidas en cm y mm", "1.00"),
+            CourseItem(R.mipmap.ic_launcher_round, "Carpeta Anillada tamaño A4", "Carpeta plástica o de cartón prensado con anillos metálicos", "2.00"),
+            CourseItem(R.mipmap.ic_launcher_round, "Goma líquida 250gr", "Goma líquida, pega rápido y duradero, no tóxico", "3.50"),
+            CourseItem(R.mipmap.ic_launcher_round, "Tijera escolar 13cm", "Tijera segura para niños, con agarre ergónomico", "2.60")
+        )
 
-            // Mostrar un resumen en Toast
-            val mensaje =
-                "Cliente: $nombre\nTel: $telefono\nProducto: $producto\nCantidad: $cantidad\nDir: $direccion"
-            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
-
-            //validacion
-            fabEnviar.setOnClickListener {
-                val nombre = edtNombre.text.toString().trim()
-                val telefono = edtTelefono.text.toString().trim()
-                val producto = edtProducto.text.toString().trim()
-                val cantidad = edtCantidad.text.toString().trim()
-                val direccion = edtDircliente.text.toString().trim()
-                when {
-                    nombre.isEmpty() -> {
-                        edtNombre.error = "Ingrese su nombre"
-                        edtNombre.requestFocus()
-                    }
-
-                    telefono.isEmpty() -> {
-                        edtTelefono.error = "Ingrese su teléfono"
-                        edtTelefono.requestFocus()
-                    }
-
-                    !telefono.matches(Regex("^[0-9]{6,9}$")) -> {
-                        edtTelefono.error = "Teléfono no válido"
-                        edtTelefono.requestFocus()
-                    }
-
-                    producto.isEmpty() -> {
-                        edtProducto.error = "Ingrese producto"
-                        edtProducto.requestFocus()
-                    }
-
-                    cantidad.isEmpty() -> {
-                        edtCantidad.error = "Ingrese cantidad"
-                        edtCantidad.requestFocus()
-                    }
-
-                    cantidad.toIntOrNull() == null || cantidad.toInt() <= 0 -> {
-                        edtCantidad.error = "Cantidad no válida"
-                        edtCantidad.requestFocus()
-                    }
-
-                    direccion.isEmpty() -> {
-                        edtDircliente.error = "Ingrese dirección"
-                        edtDircliente.requestFocus()
-                    }
-
-                    else -> {
-                        // Todo válido → muestra el mensaje
-                        val mensaje = """
-                Cliente: $nombre
-                Tel: $telefono
-                Producto: $producto
-                Cantidad: $cantidad
-                Dir: $direccion
-            """.trimIndent()
-
-                        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
-                    }
-                }
+        b.recyclerCourses.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = CourseAdapter(courses){ item ->
+                Toast.makeText(this@MainActivity, "Curso: ${item.title}", Toast.LENGTH_SHORT).show()
             }
+        }
+        b.fabAdd.setOnClickListener {
+            val intent = Intent(this, FormActivity::class.java)
+            startActivity(intent)
         }
     }
 }

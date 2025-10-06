@@ -10,26 +10,32 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/Theme.Material3.DayNight.NoActionBar">
 
         <!-- SplashActivity -->
         <activity
             android:name=".SplashActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+        </activity>
+
+        <!--Login Activity -->
+        <activity
+            android:name=".LoginActivity">
         </activity>
 
         <!--Main Activity -->
         <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+            android:name=".MainActivity">
+        </activity>
+
+        <!--Form Activity -->
+        <activity
+            android:name=".FormActivity">
         </activity>
     </application>
 
