@@ -16,7 +16,8 @@ class CourseAdapter(
             b.ivImage.setImageResource(item.imageRes)
             b.tvTitle.text = item.title
             b.tvDescription.text = item.description
-            b.tvPrice.text = item.price
+            b.tvPrice.text = "S/. ${item.price}"
+            b.tvStock.text ="${item.stock} en stock"
             b.root.setOnClickListener { onClick(item) }
         }
     }

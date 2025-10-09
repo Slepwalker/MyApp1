@@ -8,5 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_blue_white">#E6F0FF</color>
-    <color name="Strong_Pink">#E91E63</color>
+    <color name="strong_pink">#E91E63</color>
+    <color name="blue">#0000FF</color>
+    <color name="gray">#808080</color>
+    <color name="dark_gray">#2E3233</color>
+    <color name="dark_blue">#0016A8</color>
+    <color name="turquoise">#32CDEC</color>
+    <color name="royal_blue">#374CEB</color>
+    <color name="dark_red">#A30000</color>
 </resources>

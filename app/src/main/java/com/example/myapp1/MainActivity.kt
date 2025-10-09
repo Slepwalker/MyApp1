@@ -30,16 +30,16 @@ class MainActivity : AppCompatActivity() {
         b.tvEmail.text = email
 
         val courses = listOf(
-            CourseItem(R.mipmap.ic_launcher_round, "Cuaderno A4 tapa dura rayado","Cuaderno de tapa dura, ideal para clases o apuntes","5.00"),
-            CourseItem(R.mipmap.ic_launcher_round,"Lápiz grafito HB","Lápiz tecnico para escritura y dibujo técnico","0.50"),
-            CourseItem(R.mipmap.ic_launcher_round,"Lapicero Azul Pilot", "Lapicero de Tinta Azul con agarre ergonómico", "3.50"),
-            CourseItem(R.mipmap.ic_launcher_round, "Marcadores permanentes", "Set de marcadores (Negro, Rojo, Azul, Verde)", "6.00"),
-            CourseItem(R.mipmap.ic_launcher_round, "Resaltadores Stabilo", "Resaltadores de coloeres (Amarillo, Rosa, Verde, Celeste, Naranja", "7.50"),
-            CourseItem(R.mipmap.ic_launcher_round, "Goma de Borrar","Goma de Borrar Blanca", "0.50"),
-            CourseItem(R.mipmap.ic_launcher_round, "Regla plástica 30cm", "Regla Transparente con medidas en cm y mm", "1.00"),
-            CourseItem(R.mipmap.ic_launcher_round, "Carpeta Anillada tamaño A4", "Carpeta plástica o de cartón prensado con anillos metálicos", "2.00"),
-            CourseItem(R.mipmap.ic_launcher_round, "Goma líquida 250gr", "Goma líquida, pega rápido y duradero, no tóxico", "3.50"),
-            CourseItem(R.mipmap.ic_launcher_round, "Tijera escolar 13cm", "Tijera segura para niños, con agarre ergónomico", "2.60")
+            CourseItem(R.drawable.prod_cuaderno, "Cuaderno A4 tapa dura rayado","Cuaderno de tapa dura, ideal para clases o apuntes","5.00", "30"),
+            CourseItem(R.drawable.prod_lapiz,"Lápiz grafito HB","Lápiz tecnico para escritura y dibujo técnico","0.50","100"),
+            CourseItem(R.drawable.prod_lapicero,"Lapicero Azul Pilot", "Lapicero de Tinta Azul con agarre ergonómico", "3.50","23"),
+            CourseItem(R.drawable.prod_marcador, "Marcadores permanentes", "Set de marcadores (Negro, Rojo, Azul, Verde)", "6.00","46"),
+            CourseItem(R.drawable.prod_resaltadores, "Resaltadores Stabilo", "Resaltadores de coloeres (Amarillo, Rosa, Verde, Celeste, Naranja", "7.50","53"),
+            CourseItem(R.drawable.prod_goma, "Goma de Borrar","Goma de Borrar Blanca", "0.50","102"),
+            CourseItem(R.drawable.prod_regla, "Regla plástica 30cm", "Regla Transparente con medidas en cm y mm", "1.00","60"),
+            CourseItem(R.drawable.prod_carpetas, "Carpeta Anillada tamaño A4", "Carpeta plástica o de cartón prensado con anillos metálicos", "2.00","45"),
+            CourseItem(R.drawable.prod_goma, "Goma líquida 250gr", "Goma líquida, pega rápido y duradero, no tóxico", "3.50","38"),
+            CourseItem(R.drawable.prod_tijera, "Tijera escolar 13cm", "Tijera segura para niños, con agarre ergónomico", "2.60","47")
         )
 
         b.recyclerCourses.apply {

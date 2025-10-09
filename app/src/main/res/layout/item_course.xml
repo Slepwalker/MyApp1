@@ -12,14 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="12dp">
+        android:padding="16dp"
+        android:background="@drawable/item_course_border"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/ivImage"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:src="@mipmap/ic_launcher_round"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -46,9 +48,18 @@
                 android:id="@+id/tvPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precio S/."
+                android:text="Precio"
+                android:textStyle="bold"
                 android:textSize="12sp"
-                android:textColor="#666"/>
+                android:textColor="@color/dark_red"/>
+
+            <TextView
+                android:id="@+id/tvStock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cantidad"
+                android:textSize="12sp"
+                android:textColor="@color/dark_blue"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

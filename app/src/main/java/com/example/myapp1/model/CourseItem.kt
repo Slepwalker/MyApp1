@@ -4,5 +4,6 @@ data class CourseItem(
     val imageRes: Int,
     val title: String,
     val description: String,
-    val price: String
+    val price: String,
+    val stock: String
 )
