@@ -16,4 +16,6 @@
     <color name="turquoise">#32CDEC</color>
     <color name="royal_blue">#374CEB</color>
     <color name="dark_red">#A30000</color>
+    <color name="transparent_black">#80000000</color>
+    <color name="olive">#959806</color>
 </resources>

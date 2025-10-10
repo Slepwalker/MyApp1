@@ -32,8 +32,8 @@ class LoginActivity : AppCompatActivity(){
 
             if (nameErrors.isEmpty() && emailErrors.isEmpty() && passErrors.isEmpty()){
                 val i = Intent(this, MainActivity::class.java).apply {
-                    putExtra(MainActivity.EXTRA_STUDENT_NAME, name)
-                    putExtra(MainActivity.EXTRA_STUDENT_EMAIL,email)
+                    putExtra(MainActivity.EXTRA_CLIENT_NAME, name)
+                    putExtra(MainActivity.EXTRA_CLIENT_EMAIL,email)
                 }
                 startActivity(i)
             }else{

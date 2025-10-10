@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity"
+    android:background="@color/white">
+
+    <!-- Title -->
+
+    <TextView
+        android:id="@+id/txtTitulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Agregar Producto"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- campos -->
+    <TableLayout
+        android:id="@+id/tblCampos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:stretchColumns="1"
+        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="87dp"
+                android:text="Producto:" />
+
+            <EditText
+                android:id="@+id/edtProducto"
+                android:inputType="text"
+                android:minHeight="48dp"/>
+        </TableRow>
+
+        <TableRow>
+            <TextView android:text="Descripcion:" />
+
+            <EditText
+                android:id="@+id/edtDescripcion"
+                android:inputType="text"
+                android:minHeight="48dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="Precio:" />
+
+            <EditText
+                android:id="@+id/edtPrecio"
+                android:inputType="text"
+                android:minHeight="48dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView android:text="Cantidad:" />
+
+            <EditText
+                android:id="@+id/edtCantidad"
+                android:inputType="text"
+                android:minHeight="48dp" />
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_width="77dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:text="Imagen del producto:" />
+
+            <ImageView
+                android:id="@+id/imgProducto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/edtCantidad"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:contentDescription="Imagen del producto"
+                android:background="@drawable/item_course_border"
+                android:clickable="true"
+                android:focusable="true"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true" />
+        </TableRow>
+        <Button
+            android:id="@+id/btnGuardar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Guardar"
+            app:layout_constraintTop_toBottomOf="@id/imgProducto"
+            android:backgroundTint="@color/dark_blue"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp"/>
+    </TableLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

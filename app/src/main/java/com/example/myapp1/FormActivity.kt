@@ -1,18 +1,29 @@
 package com.example.myapp1
 
 import android.content.Intent
+import android.graphics.drawable.BitmapDrawable
+import android.net.Uri
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapp1.databinding.ActivityFormBinding
+import com.example.myapp1.ui.theme.adapter.CourseAdapter
 
 class FormActivity: AppCompatActivity(){
 
     private lateinit var b: ActivityFormBinding
+    private var imageUri: Uri? =null
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()){
         uri -> if (uri != null) {
+            contentResolver.takePersistableUriPermission(
+            uri,
+            Intent.FLAG_GRANT_READ_URI_PERMISSION
+        )
+            imageUri = uri
             b.imgProducto.setImageURI(uri)
+            b.imgProducto.tag = uri.toString()
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,34 +32,50 @@ class FormActivity: AppCompatActivity(){
         setContentView(b.root)
 
         b.imgProducto.setOnClickListener {
+            val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                addCategory(Intent.CATEGORY_OPENABLE)
+                type = "image/*"
+            }
             pickImageLauncher.launch("image/*")
         }
 
         b.btnGuardar.setOnClickListener {
+
             val product = b.edtProducto.text?.toString().orEmpty().trim()
             val description = b.edtDescripcion.text.toString().orEmpty().trim()
             val price = b.edtPrecio.text.toString().orEmpty().trim()
             val stock = b.edtCantidad.text.toString().orEmpty().trim()
+            val imageUri = b.imgProducto.tag as? String
 
             val productErrors = validateProducto(product)
             val descriptionErrors = validateDescripcion(description)
             val priceErrors = validatePrecio(price)
             val stockErrors = validateCantidad(stock)
+            val imageErrors = mutableListOf<String>()
+            if (imageUri == null) {
+                imageErrors += "Debe seleccionar una imagen del producto"
+            }
 
             b.edtProducto.error = productErrors.firstOrNull()
             b.edtDescripcion.error = descriptionErrors.firstOrNull()
             b.edtPrecio.error = priceErrors.firstOrNull()
             b.edtCantidad.error = stockErrors.firstOrNull()
 
-            if (productErrors.isEmpty() && descriptionErrors.isEmpty() && priceErrors.isEmpty()) {
+            if (imageErrors.isNotEmpty()) {
+                Toast.makeText(this, imageErrors.first(), Toast.LENGTH_SHORT).show()
+            }
+
+            if (productErrors.isEmpty() && descriptionErrors.isEmpty() && priceErrors.isEmpty() && stockErrors.isEmpty() && imageErrors.isEmpty()) {
                 val intent = Intent()
                 intent.putExtra("product", product)
                 intent.putExtra("description", description)
                 intent.putExtra("price", price)
                 intent.putExtra("stock",stock)
+                intent.putExtra("imageUri",imageUri)
                 setResult(RESULT_OK, intent)
                 finish()
             }
+
         }
     }
 
@@ -83,8 +110,13 @@ class FormActivity: AppCompatActivity(){
         val errs = mutableListOf<String>()
         if (stock.isEmpty()) errs += "La cantidad es requerido"
         if (!stock.all { it.isDigit() }) errs += "Solo se permiten numeros"
-        if (stock.toInt() < 0) errs += "La cantidad minima es 1"
-        if (stock.toInt() > 9999) errs += "La cantidad maxima es 9999"
+        val value = stock.toIntOrNull()
+        if (value != null) {
+            if (value < 1) errs += "La cantidad minima es 1"
+            if (value > 9999) errs += "La cantidad maxima es 9999"
+        }else{
+            errs += "cantidad invalida"
+        }
         if (stock.any(){it.isWhitespace()}) errs += "No debe contener espacios"
         return errs
     }
