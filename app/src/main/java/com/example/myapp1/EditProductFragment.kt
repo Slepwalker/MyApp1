@@ -90,8 +90,9 @@ class EditProductFragment : Fragment() {
                 Toast.makeText(requireContext(), "Complete todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            val existingItem = arguments?.getParcelable<CourseItem>("product",CourseItem::class.java)
             val updateItem = CourseItem(
-                id = id,
+                id = existingItem!!.id,
                 imageRes = imageResValue,
                 title = title,
                 description = description,

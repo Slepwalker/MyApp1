@@ -7,13 +7,17 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.myapp1.databinding.ActivityFormBinding
+import com.example.myapp1.model.AppDatabase
+import com.example.myapp1.model.CourseItem
 import com.example.myapp1.ui.theme.adapter.CourseAdapter
+import kotlinx.coroutines.launch
 
 class FormActivity: AppCompatActivity(){
-
     private lateinit var b: ActivityFormBinding
     private var imageUri: Uri? =null
+    private lateinit var db: AppDatabase
 
     private val pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()){
         uri -> if (uri != null) {
@@ -38,6 +42,8 @@ class FormActivity: AppCompatActivity(){
             }
             pickImageLauncher.launch("image/*")
         }
+
+        db = AppDatabase.getDatabase(this)
 
         b.btnGuardar.setOnClickListener {
 
@@ -66,14 +72,23 @@ class FormActivity: AppCompatActivity(){
             }
 
             if (productErrors.isEmpty() && descriptionErrors.isEmpty() && priceErrors.isEmpty() && stockErrors.isEmpty() && imageErrors.isEmpty()) {
-                val intent = Intent()
-                intent.putExtra("product", product)
-                intent.putExtra("description", description)
-                intent.putExtra("price", price)
-                intent.putExtra("stock",stock)
-                intent.putExtra("imageUri",imageUri)
-                setResult(RESULT_OK, intent)
-                finish()
+                val newItem = CourseItem(
+                title = product,
+                description = description,
+                price =  price,
+                stock =  stock,
+                imageUri =  imageUri
+                )
+                lifecycleScope.launch {
+                    db.courseItemDao().insert(newItem)
+                    Toast.makeText(
+                        this@FormActivity,
+                        "Producto agregado con éxito",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    setResult(RESULT_OK)
+                    finish()
+                }
             }
 
         }
