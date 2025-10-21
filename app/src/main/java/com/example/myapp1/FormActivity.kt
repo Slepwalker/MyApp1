@@ -35,6 +35,9 @@ class FormActivity: AppCompatActivity(){
         b = ActivityFormBinding.inflate(layoutInflater)
         setContentView(b.root)
 
+        setSupportActionBar(b.toolbarMain)
+        supportActionBar?.title = ""
+
         b.imgProducto.setOnClickListener {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
                 addCategory(Intent.CATEGORY_OPENABLE)

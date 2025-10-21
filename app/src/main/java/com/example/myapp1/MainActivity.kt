@@ -54,6 +54,9 @@ class MainActivity : AppCompatActivity() {
         b = ActivityMainBinding.inflate(layoutInflater)
         setContentView(b.root)
 
+        setSupportActionBar(b.toolbarMain)
+        supportActionBar?.title = ""
+
         val name = intent.getStringExtra(EXTRA_CLIENT_NAME).orEmpty()
         val email = intent.getStringExtra(EXTRA_CLIENT_EMAIL).orEmpty()
 

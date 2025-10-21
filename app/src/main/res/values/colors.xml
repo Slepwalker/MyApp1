@@ -18,4 +18,7 @@
     <color name="dark_red">#A30000</color>
     <color name="transparent_black">#80000000</color>
     <color name="olive">#959806</color>
+    <color name="office_green">#0D7D0F</color>
+    <color name="dark_violet">#9D07BB</color>
+    <color name="goldenrod">#E3D53B</color>
 </resources>

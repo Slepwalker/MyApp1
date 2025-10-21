@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapp1.databinding.FragmentEditProductBinding
 import com.example.myapp1.model.CourseItem
@@ -58,6 +59,9 @@ class EditProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val toolbar = view.findViewById<Toolbar>(R.id.toolbarEdit)
+        toolbar.title = ""
 
         productToEdit = arguments?.getParcelable("product", CourseItem::class.java)
         productToEdit?.let {
